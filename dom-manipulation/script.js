@@ -6,7 +6,7 @@ const quoteButton = document.getElementById("newQuote");
 
 const quotes = [];
 
-function addQuote(text, category) {
+function createAddQuoteForm(text, category) {
   quotes.push({ text, category });
 
   quoteDisplaySect.innerHTML += `
