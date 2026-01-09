@@ -2,52 +2,50 @@ const formQuote = document.querySelector(".form-quote");
 const formCategory = document.getElementById("category");
 const formInput = document.getElementById("quote");
 const quoteDisplaySect = document.getElementById("quoteDisplay");
-const quoteButton = document.getElementById("newQuote"); 
+const quoteButton = document.getElementById("newQuote");
 
-const quoteContainer = [];
+const quotes = [];
 
-formQuote.addEventListener("submit", (e) => {
+/* REQUIRED FUNCTION */
+function addQuote(text, category) {
+  quotes.push({ text, category });
+
+  quoteDisplaySect.innerHTML += `
+    <div class="quotes">
+      <p>${text}</p>
+      <small>${category}</small>
+    </div>
+  `;
+}
+
+/* REQUIRED FUNCTION */
+function displayRandomQuote() {
+  if (quotes.length === 0) return;
+
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const randomQuote = quotes[randomIndex];
+
+  quoteDisplaySect.innerHTML = `
+    <div class="quotes">
+      <p>${randomQuote.text}</p>
+      <small>${randomQuote.category}</small>
+    </div>
+  `;
+}
+
+/* form submit */
+formQuote.addEventListener("submit", function (e) {
   e.preventDefault();
-  createAddQuoteForm();
-});
 
-function createAddQuoteForm() {
-//converting quotes to objects, so as to be stored in the array
- const text = formInput.value.trim();
+  const text = formInput.value.trim();
   const category = formCategory.value.trim();
 
   if (!text || !category) return;
 
-  // 1️⃣ store quote as object
-  const newQuote = {
-    text,
-    category
-  };
+  addQuote(text, category);
 
-  quoteContainer.push(newQuote);
-
-  const quotesDiv = document.createElement("div");
-  quotesDiv.classList.add("quotes");
-
-  const quotesParagragh = document.createElement("p");
-  quotesParagragh.classList.add("quotesP");
-  quotesParagragh.textContent = formInput.value;
-
-  const quotesCategory = document.createElement("small");
-  quotesCategory.classList.add("quotesC");
-  quotesCategory.textContent = formCategory.value;
-
-  quotesDiv.append(quotesParagragh, quotesCategory);
-
-  quoteDisplaySect.appendChild(quotesDiv);
-
-  formCategory.value = "";
   formInput.value = "";
+  formCategory.value = "";
+});
 
-}
-
-function showRandomQuote() {
-  const randomIndex = Math.floor(Math.random() * quoteContainer.length);
-  const randomQuote = quoteContainer[randomIndex];
-}
-
+quoteButton.addEventListener("click", displayRandomQuote);
