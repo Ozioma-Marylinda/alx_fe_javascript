@@ -13,9 +13,15 @@
       <input type="text" id="quote" placeholder="Enter a new quote"/>
       <label for="category">Category</label>
       <input type="text" id="category"placeholder="Enter quote category"/>
-      
-       <button type="submit" id="newQuote">Add Quote</button>
+      <label for="category">Category</label>
+      <input type="text" id="category" placeholder="Enter quote category"/>
+      <button type="submit" id="newQuote">Add Quote</button>
     </form>
+
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter">
+    <option value="all">All Categories</option>
+    </select>
     <div id="quoteDisplay"></div>
     <button id="showRandomQuote">Show Random Quote</button>
     <button id="exportJson">Export Quotes</button>
