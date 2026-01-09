@@ -6,7 +6,6 @@ const quoteButton = document.getElementById("newQuote");
 
 const quotes = [];
 
-/* REQUIRED FUNCTION */
 function addQuote(text, category) {
   quotes.push({ text, category });
 
@@ -18,8 +17,7 @@ function addQuote(text, category) {
   `;
 }
 
-/* REQUIRED FUNCTION */
-function displayRandomQuote() {
+function showRandomQuote() {
   if (quotes.length === 0) return;
 
   const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -33,7 +31,6 @@ function displayRandomQuote() {
   `;
 }
 
-/* form submit */
 formQuote.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -48,4 +45,5 @@ formQuote.addEventListener("submit", function (e) {
   formCategory.value = "";
 });
 
-quoteButton.addEventListener("click", displayRandomQuote);
+
+quoteButton.addEventListener("click", showRandomQuote);
