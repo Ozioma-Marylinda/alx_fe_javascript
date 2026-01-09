@@ -7,9 +7,7 @@ const categoryFilter = document.getElementById("categoryFilter");
 const importFileInput = document.getElementById("importFile");
 const exportBtn = document.getElementById("exportJson");
 
-
 const quotes = [];
-
 
 function saveQuotes() {
   localStorage.setItem("quotes", JSON.stringify(quotes));
@@ -22,7 +20,6 @@ function loadQuotes() {
     parsedQuotes.forEach(q => addQuote(q.text, q.category, false)); // false = don't save again
   }
 }
-
 
 function displayQuote(quote) {
   const quoteDiv = document.createElement("div");
@@ -47,8 +44,8 @@ function addQuote(text, category, save = true) {
 
 
   populateCategories();
-  filterQuotes(); 
 }
+
 
 function showRandomQuote() {
   if (quotes.length === 0) return;
@@ -59,7 +56,6 @@ function showRandomQuote() {
   quoteDisplaySect.innerHTML = "";
   displayQuote(randomQuote);
 
-  
   sessionStorage.setItem("lastQuote", JSON.stringify(randomQuote));
 }
 
@@ -75,18 +71,25 @@ function populateCategories() {
     categoryFilter.appendChild(option);
   });
 
-  const lastFilter = localStorage.getItem("lastFilter");
-  if (lastFilter) categoryFilter.value = lastFilter;
-}
 
+  const lastFilter = localStorage.getItem("lastFilter") || "all";
+  categoryFilter.value = lastFilter;
+
+  filterQuotes();
+}
 
 function filterQuotes() {
   const selected = categoryFilter.value;
+
+
   localStorage.setItem("lastFilter", selected);
+
 
   quoteDisplaySect.innerHTML = "";
 
+
   const filtered = selected === "all" ? quotes : quotes.filter(q => q.category === selected);
+
   filtered.forEach(q => displayQuote(q));
 }
 
@@ -124,6 +127,7 @@ exportBtn.addEventListener("click", () => {
   URL.revokeObjectURL(url);
 });
 
+
 importFileInput.addEventListener("change", importFromJsonFile);
 function importFromJsonFile(event) {
   const file = event.target.files[0];
@@ -143,9 +147,9 @@ function importFromJsonFile(event) {
 }
 
 
-loadQuotes();
-populateCategories();
-filterQuotes();
+loadQuotes();       
+populateCategories(); 
+
 
 const lastQuote = sessionStorage.getItem("lastQuote");
 if (lastQuote) displayQuote(JSON.parse(lastQuote));
