@@ -7,14 +7,19 @@ const quoteButton = document.getElementById("newQuote");
 const quotes = [];
 
 function createAddQuoteForm(text, category) {
-  quotes.push({ text, category });
+const newQuote = { text, category };
+  quotes.push(newQuote);
 
-  quoteDisplaySect.innerHTML += `
-    <div class="quotes">
-      <p>${text}</p>
-      <small>${category}</small>
-    </div>
-  `;
+  const quoteDiv = document.createElement("div");
+  const quoteText = document.createElement("p");
+  const quoteCategory = document.createElement("small");
+
+  quoteText.textContent = text;
+  quoteCategory.textContent = category;
+
+  quoteDiv.appendChild(quoteText);
+  quoteDiv.appendChild(quoteCategory);
+  quoteDisplaySect.appendChild(quoteDiv);
 }
 
 function showRandomQuote() {
@@ -23,12 +28,18 @@ function showRandomQuote() {
   const randomIndex = Math.floor(Math.random() * quotes.length);
   const randomQuote = quotes[randomIndex];
 
-  quoteDisplaySect.innerHTML = `
-    <div class="quotes">
-      <p>${randomQuote.text}</p>
-      <small>${randomQuote.category}</small>
-    </div>
-  `;
+  quoteDisplaySect.innerHTML = "";
+
+  const quoteDiv = document.createElement("div");
+  const quoteText = document.createElement("p");
+  const quoteCategory = document.createElement("small");
+
+  quoteText.textContent = randomQuote.text;
+  quoteCategory.textContent = randomQuote.category;
+
+  quoteDiv.appendChild(quoteText);
+  quoteDiv.appendChild(quoteCategory);
+  quoteDisplaySect.appendChild(quoteDiv);
 }
 
 formQuote.addEventListener("submit", function (e) {
