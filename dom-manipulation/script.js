@@ -72,25 +72,25 @@ function populateCategories() {
   });
 
 
-  const lastFilter = localStorage.getItem("lastFilter") || "all";
-  categoryFilter.value = lastFilter;
+  const selectedCategory = localStorage.getItem("lastFilter") || "all";
+  categoryFilter.value = selectedCategory;
 
   filterQuotes();
 }
 
 function filterQuotes() {
-  const selected = categoryFilter.value;
+  const selectedCategory = categoryFilter.value;
 
 
-  localStorage.setItem("lastFilter", selected);
+  localStorage.setItem("lastFilter", selectedCategory);
 
 
   quoteDisplaySect.innerHTML = "";
 
 
-  const filtered = selected === "all" ? quotes : quotes.filter(q => q.category === selected);
+  const filteredQuotes = selectedCategory === "all" ? quotes : quotes.filter(q => q.category === selected);
 
-  filtered.forEach(q => displayQuote(q));
+  filteredQuotes.forEach(q => displayQuote(q));
 }
 
 
