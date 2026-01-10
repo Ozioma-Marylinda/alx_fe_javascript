@@ -85,6 +85,7 @@ async function syncQuotes() {
 
       displayQuotes(quotes);
       syncStatus.innerText = "⚠️ Server data synced and conflicts resolved.";
+      alert("Quotes synced with server!");
     } else {
       syncStatus.innerText = "✅ Data already in sync.";
     }
